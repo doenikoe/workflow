@@ -260,7 +260,7 @@
       <bpmn2:outgoing>SequenceFlow_37</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_37" name="" sourceRef="Service_SaveAllocation" targetRef="AllocationApproval"/>
-    <bpmn2:userTask id="UserTask_1" name="Entry Allocation Order">
+    <bpmn2:userTask id="UserTask_1" camunda:assignee="${assignTo}" name="Entry Allocation Order">
       <bpmn2:extensionElements>
         <camunda:formData>
           <camunda:formField id="createdBy" label="Created By" type="string"/>
@@ -269,6 +269,7 @@
           <camunda:formField id="svcAddress" label="Service Address" type="string" defaultValue="/AllocationAndOrder.svc/PTP_PRT_PUT_OrderAndAllocation_Insert/0"/>
           <camunda:formField id="svcMethod" label="Service Method" type="string" defaultValue="put"/>
         </camunda:formData>
+        <camunda:taskListener class="org.camunda.bpm.praisindo.tasklistener.TaskRefresh" event="create"/>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_valid</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_continue</bpmn2:incoming>

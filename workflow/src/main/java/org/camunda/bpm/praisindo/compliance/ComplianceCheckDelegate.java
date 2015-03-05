@@ -62,8 +62,7 @@ public class ComplianceCheckDelegate implements JavaDelegate{
 				}else{
 					execution.setVariable("complianceChecking", false);	
 					execution.setVariable("errorMessagePushed", warningMessage);					
-					execution.setVariable("warningCode", warningCode);					
-					System.out.print(execution.getVariable("warningCode"));
+					execution.setVariable("warningCode", warningCode);										
 				}
 				
 			}else{

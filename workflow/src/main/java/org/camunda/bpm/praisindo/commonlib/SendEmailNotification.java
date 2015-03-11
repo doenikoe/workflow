@@ -28,7 +28,7 @@ public class SendEmailNotification implements JavaDelegate{
 	private UIParams param = new UIParams();
 
 	public void execute(DelegateExecution execution) throws Exception {
-		String assignee = (String) execution.getVariable("assignTo");
+		String assignee = (String) execution.getVariable("assignee");
 	    String taskId = (String) execution.getVariable("taskID");
 	    String taskName = (String) execution.getVariable("taskName");	    	    	    	    
 

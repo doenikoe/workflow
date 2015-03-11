@@ -1,7 +1,7 @@
 package org.camunda.bpm.praisindo.commonlib;
 
-import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.engine.delegate.DelegateTask;
+import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 
 import com.sun.jersey.api.client.Client;
@@ -10,13 +10,14 @@ import com.sun.jersey.api.client.WebResource;
 
 import org.camunda.bpm.praisindo.commonlib.UIParams;
 
-public class ValidationMessage implements JavaDelegate{
+public class UserConfirmation implements TaskListener{
 	
 	private String nodeService = "/notif";
 	
-	public void execute(DelegateExecution execution) throws Exception {
-		String errorMessagePushed = (String) execution.getVariable("message");
-		String creator = (String) execution.getVariable("createdBy");
+	public void notify(DelegateTask task) {
+		String errorMessagePushed = (String) task.getVariable("errorMessagePushed");
+		String creator = (String) task.getVariable("createdBy");
+		String taskID = (String) task.getId();
 	
 		JSONObject jsonPush = new JSONObject();
 		
@@ -28,8 +29,9 @@ public class ValidationMessage implements JavaDelegate{
 			WebResource webResource = client.resource(nodeUrl + nodeService);
 			
 			jsonPush.put("requestto", creator);
-			jsonPush.put("channel", "validationError");
-			jsonPush.put("message", errorMessagePushed);			
+			jsonPush.put("channel", "userConfirmation");
+			jsonPush.put("message", errorMessagePushed);
+			jsonPush.put("callBackUserTaskID", taskID);
 			
 			ClientResponse response = webResource.type("application/json").post(ClientResponse.class, jsonPush.toString());
 			if (response.getStatus() != 200) {
@@ -37,7 +39,13 @@ public class ValidationMessage implements JavaDelegate{
 				throw new Exception("Err("+response.getStatus()+") "+body);
 			}
 		}catch(Exception e){
-			throw new Exception("Err("+e.hashCode()+") " + e.getMessage());
+			try {
+				throw new Exception("Err("+e.hashCode()+") " + e.getMessage());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
+		
 	}
 }

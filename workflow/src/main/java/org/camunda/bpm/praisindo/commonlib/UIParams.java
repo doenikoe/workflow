@@ -17,7 +17,7 @@ public class UIParams {
 	private MongoClient mongoClient;
 	protected DB db;
 	private DBCollection collection;
-	private String host = "chivas";
+	private String host = "192.168.69.26";//chivas
 	private int port = 27017;
 	
 	private String dbName = "ims";

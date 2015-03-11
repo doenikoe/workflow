@@ -8,59 +8,55 @@
       <bpmn2:lane id="FundManager" name="Fund Manager">
         <bpmn2:flowNodeRef>StartEvent_1</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>EndEvent_2</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>ServiceTask_6</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Service_ValidationBlock</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>CheckCompliance</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>ComplianceGateway</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>ExclusiveGateway_3</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>UserTask_2</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>UserConfirmation</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>ExclusiveGateway_1</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>EditAllocation</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>ServiceTask_1</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Service_MessageToDealer</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>ApprovalParallelGateway</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>ApprovalGateway</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>Service_FirstApproval</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Service_AllocationApproval</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>AllocationApproval</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Service_SaveAllocation</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>UserTask_1</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>EntryAllocation</bpmn2:flowNodeRef>
       </bpmn2:lane>
       <bpmn2:lane id="Dealer" name="Dealer">
         <bpmn2:flowNodeRef>OrderExecution</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>EndEvent</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>Service_Execute</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Service_ExecuteOrder</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>ParallelGateway_2</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>OrderConfirmation</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>Service_Confirmation</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>Service_LastApproval</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>BrokerApproval</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Service_OrderConfirmation</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Service_OrderApproval</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>OrderApproval</bpmn2:flowNodeRef>
       </bpmn2:lane>
       <bpmn2:lane id="Broker" name="Broker">
-        <bpmn2:flowNodeRef>ServiceTask_5</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Service_MessageToBroker</bpmn2:flowNodeRef>
       </bpmn2:lane>
     </bpmn2:laneSet>
-    <bpmn2:userTask id="OrderExecution" camunda:assignee="${assignTo}" name="Order Execution">
+    <bpmn2:userTask id="OrderExecution" camunda:assignee="admin" name="Order Execution">
       <bpmn2:documentation>Execute order allocation.</bpmn2:documentation>
       <bpmn2:extensionElements>
         <camunda:taskListener class="org.camunda.bpm.praisindo.tasklistener.TaskRefresh" event="assignment"/>
         <camunda:formData>
-          <camunda:formField id="createdBy" label="Created By" type="string"/>
-          <camunda:formField id="assignTo" label="Assign To" type="string"/>
           <camunda:formField id="jsonData" label="JSON Data" type="string"/>
           <camunda:formField id="sourceFile" label="File" type="string" defaultValue="E:/test.txt"/>
           <camunda:formField id="CPEmail" label="Broker Email" type="string" defaultValue="praisindotesting@gmail.com"/>
           <camunda:formField id="CPName" label="Broker Contact Name" type="string" defaultValue="Praisindo Teknologi"/>
           <camunda:formField id="CPartyName" label="Broker Name" type="string" defaultValue="Praisindo Teknologi"/>
-          <camunda:formField id="svcAddress" label="Service Address" type="string" defaultValue="/AllocationAndOrder.svc/PTP_PRT_PUT_Execution_Insert"/>
-          <camunda:formField id="svcMethod" label="Service Method" type="string" defaultValue="put"/>
         </camunda:formData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_55</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="OrderExecution" targetRef="Service_Execute"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="OrderExecution" targetRef="Service_ExecuteOrder"/>
     <bpmn2:endEvent id="EndEvent" name="End Process">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:serviceTask id="Service_Execute" camunda:class="org.camunda.bpm.praisindo.oms.AllocationAndOrder" name="Execute Order">
+    <bpmn2:serviceTask id="Service_ExecuteOrder" camunda:class="org.camunda.bpm.praisindo.oms.OrderExecution" name="Execute Order">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -70,53 +66,46 @@
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
     </bpmn2:parallelGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_15" name="" sourceRef="ParallelGateway_2" targetRef="OrderConfirmation"/>
-    <bpmn2:userTask id="OrderConfirmation" camunda:assignee="${assignTo}" name="Order Confirmation">
+    <bpmn2:userTask id="OrderConfirmation" camunda:assignee="admin" name="Order Confirmation">
       <bpmn2:documentation>Leader confirmation about the order.</bpmn2:documentation>
       <bpmn2:extensionElements>
         <camunda:taskListener class="org.camunda.bpm.praisindo.tasklistener.TaskRefresh" event="assignment"/>
         <camunda:formData>
-          <camunda:formField id="createdBy" label="Created By" type="string"/>
-          <camunda:formField id="assignTo" label="Assign To" type="string"/>
           <camunda:formField id="jsonData" label="JSON Data" type="string"/>
-          <camunda:formField id="svcAddress" label="Service Address" type="string" defaultValue="/AllocationAndOrder.svc/PTP_PRT_POST_Execution_Update"/>
-          <camunda:formField id="svcMethod" label="Service Method" type="string" defaultValue="post"/>
         </camunda:formData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_15</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_16</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_16" name="" sourceRef="OrderConfirmation" targetRef="Service_Confirmation"/>
-    <bpmn2:serviceTask id="Service_Confirmation" camunda:class="org.camunda.bpm.praisindo.oms.AllocationAndOrder" name="Execute Order Confirmation">
+    <bpmn2:sequenceFlow id="SequenceFlow_16" name="" sourceRef="OrderConfirmation" targetRef="Service_OrderConfirmation"/>
+    <bpmn2:serviceTask id="Service_OrderConfirmation" camunda:class="org.camunda.bpm.praisindo.oms.OrderConfirmation" name="Execute Order Confirmation">
       <bpmn2:incoming>SequenceFlow_16</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_17</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_17" name="" sourceRef="Service_Confirmation" targetRef="BrokerApproval"/>
-    <bpmn2:serviceTask id="Service_LastApproval" camunda:class="org.camunda.bpm.praisindo.oms.AllocationAndOrder" name="Execute Order Approval">
+    <bpmn2:sequenceFlow id="SequenceFlow_17" name="" sourceRef="Service_OrderConfirmation" targetRef="OrderApproval"/>
+    <bpmn2:serviceTask id="Service_OrderApproval" camunda:class="org.camunda.bpm.praisindo.oms.OrderApproval" name="Execute Order Approval">
       <bpmn2:incoming>SequenceFlow_18</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:userTask id="BrokerApproval" camunda:assignee="${assignTo}" name="Order Approval">
+    <bpmn2:userTask id="OrderApproval" camunda:assignee="admin" name="Order Approval">
       <bpmn2:documentation>Approve the order.</bpmn2:documentation>
       <bpmn2:extensionElements>
         <camunda:taskListener class="org.camunda.bpm.praisindo.tasklistener.TaskRefresh" event="assignment"/>
         <camunda:formData>
           <camunda:formField id="jsonData" label="JSON Data" type="string"/>
-          <camunda:formField id="svcAddress" label="Service Address" type="string" defaultValue="/AllocationAndOrder.svc/PTP_PRT_POST_OrderAndAllocation_ApproveBrokerConfirmation"/>
-          <camunda:formField id="svcMethod" label="Service Method" type="string" defaultValue="post"/>
         </camunda:formData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_17</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_18</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_18" name="" sourceRef="BrokerApproval" targetRef="Service_LastApproval"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="Service_LastApproval" targetRef="EndEvent"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_7" name="" sourceRef="Service_Execute" targetRef="ParallelGateway_2"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_8" name="" sourceRef="ParallelGateway_2" targetRef="ServiceTask_5"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_18" name="" sourceRef="OrderApproval" targetRef="Service_OrderApproval"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="Service_OrderApproval" targetRef="EndEvent"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" name="" sourceRef="Service_ExecuteOrder" targetRef="ParallelGateway_2"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="" sourceRef="ParallelGateway_2" targetRef="Service_MessageToBroker"/>
     <bpmn2:startEvent id="StartEvent_1" name="Start &#xD;&#xA;(submit allocation)">
       <bpmn2:extensionElements>
         <camunda:formData>
           <camunda:formField id="createdBy" label="Created By" type="string"/>
-          <camunda:formField id="assignTo" label="Assign To" type="string"/>
           <camunda:formField id="jsonData" label="JSON Data" type="string"/>
         </camunda:formData>
       </bpmn2:extensionElements>
@@ -127,11 +116,11 @@
       <bpmn2:incoming>SequenceFlow_32</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_36</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:serviceTask id="ServiceTask_6" camunda:class="org.camunda.bpm.praisindo.commonlib.ValidationMessage" name="Compliance Validation Block">
+    <bpmn2:serviceTask id="Service_ValidationBlock" camunda:class="org.camunda.bpm.praisindo.commonlib.ValidationMessage" name="Compliance Validation Block">
       <bpmn2:incoming>SequenceFlow_blocked</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_32</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_32" name="" sourceRef="ServiceTask_6" targetRef="EndEvent_2"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_32" name="" sourceRef="Service_ValidationBlock" targetRef="EndEvent_2"/>
     <bpmn2:businessRuleTask id="CheckCompliance" camunda:class="org.camunda.bpm.praisindo.compliance.ComplianceCheckDelegate" name="Check Compliance">
       <bpmn2:documentation>Check compliance v</bpmn2:documentation>
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
@@ -147,10 +136,10 @@
     <bpmn2:sequenceFlow id="SequenceFlow_notvalid" name="No" sourceRef="ComplianceGateway" targetRef="ExclusiveGateway_1">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!complianceChecking}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_valid" name="Yes" sourceRef="ComplianceGateway" targetRef="UserTask_1">
+    <bpmn2:sequenceFlow id="SequenceFlow_valid" name="Yes" sourceRef="ComplianceGateway" targetRef="EntryAllocation">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${complianceChecking}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="ServiceTask_5" camunda:class="org.camunda.bpm.praisindo.commonlib.SendEmailNotification" name="Send Message to Broker">
+    <bpmn2:serviceTask id="Service_MessageToBroker" camunda:class="org.camunda.bpm.praisindo.commonlib.SendEmailNotification" name="Send Message to Broker">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
     </bpmn2:serviceTask>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_3">
@@ -161,41 +150,40 @@
     <bpmn2:sequenceFlow id="SequenceFlow_36" name="No" sourceRef="ExclusiveGateway_3" targetRef="EndEvent_2">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!confirmed}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_38" name="Yes" sourceRef="ExclusiveGateway_3" targetRef="UserTask_1">
+    <bpmn2:sequenceFlow id="SequenceFlow_38" name="Yes" sourceRef="ExclusiveGateway_3" targetRef="EntryAllocation">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${confirmed}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="UserTask_2" camunda:assignee="${assignTo}" name="User Confirmation">
+    <bpmn2:userTask id="UserConfirmation" camunda:assignee="admin" name="User Confirmation">
       <bpmn2:documentation>Bypass validation warning (or not).</bpmn2:documentation>
       <bpmn2:extensionElements>
         <camunda:formData>
           <camunda:formField id="confirmed" label="Confirm" type="boolean" defaultValue="true"/>
         </camunda:formData>
-        <camunda:taskListener class="org.camunda.bpm.praisindo.commonlib.ConfirmationMessage" event="create"/>
+        <camunda:taskListener class="org.camunda.bpm.praisindo.commonlib.UserConfirmation" event="create"/>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_confirm</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_35</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_35" name="" sourceRef="UserTask_2" targetRef="ExclusiveGateway_3"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_35" name="" sourceRef="UserConfirmation" targetRef="ExclusiveGateway_3"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_1">
       <bpmn2:incoming>SequenceFlow_notvalid</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_continue</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_confirm</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_blocked</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_continue" name="continue" sourceRef="ExclusiveGateway_1" targetRef="UserTask_1">
+    <bpmn2:sequenceFlow id="SequenceFlow_continue" name="continue" sourceRef="ExclusiveGateway_1" targetRef="EntryAllocation">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${warningCode == 'CONTINUE'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_confirm" name="confirm" sourceRef="ExclusiveGateway_1" targetRef="UserTask_2">
+    <bpmn2:sequenceFlow id="SequenceFlow_confirm" name="confirm" sourceRef="ExclusiveGateway_1" targetRef="UserConfirmation">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${warningCode == 'CONFIRM'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_blocked" name="blocked" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_6">
+    <bpmn2:sequenceFlow id="SequenceFlow_blocked" name="blocked" sourceRef="ExclusiveGateway_1" targetRef="Service_ValidationBlock">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${warningCode=='BLOCKED'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="EditAllocation" camunda:assignee="${assignTo}" name="Edit Allocation">
+    <bpmn2:userTask id="EditAllocation" name="Edit Allocation">
       <bpmn2:extensionElements>
         <camunda:formData>
           <camunda:formField id="createdBy" label="Created By" type="string"/>
-          <camunda:formField id="assignTo" label="Assign To" type="string"/>
           <camunda:formField id="jsonData" label="JSON Data" type="string"/>
         </camunda:formData>
       </bpmn2:extensionElements>
@@ -203,7 +191,7 @@
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="EditAllocation" targetRef="CheckCompliance"/>
-    <bpmn2:serviceTask id="ServiceTask_1" camunda:class="org.camunda.bpm.praisindo.commonlib.SendEmailNotification" name="Send Message to Dealer">
+    <bpmn2:serviceTask id="Service_MessageToDealer" camunda:class="org.camunda.bpm.praisindo.commonlib.SendEmailNotification" name="Send Message to Dealer">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
     </bpmn2:serviceTask>
     <bpmn2:parallelGateway id="ApprovalParallelGateway">
@@ -212,45 +200,41 @@
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:parallelGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_55" name="" sourceRef="ApprovalParallelGateway" targetRef="OrderExecution"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="ApprovalParallelGateway" targetRef="ServiceTask_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="ApprovalParallelGateway" targetRef="Service_MessageToDealer"/>
     <bpmn2:exclusiveGateway id="ApprovalGateway" name="Is Approved ?">
       <bpmn2:incoming>SequenceFlow_40</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_approved</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_notapproved</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_approved" name="Yes" sourceRef="ApprovalGateway" targetRef="Service_FirstApproval">
+    <bpmn2:sequenceFlow id="SequenceFlow_approved" name="Yes" sourceRef="ApprovalGateway" targetRef="Service_AllocationApproval">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_notapproved" name="No" sourceRef="ApprovalGateway" targetRef="EditAllocation">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="Service_FirstApproval" camunda:class="org.camunda.bpm.praisindo.oms.AllocationAndOrder" name="Execute Allocation Approval">
+    <bpmn2:serviceTask id="Service_AllocationApproval" camunda:class="org.camunda.bpm.praisindo.oms.AllocationApproval" name="Execute Allocation Approval">
       <bpmn2:incoming>SequenceFlow_approved</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_46</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_46" name="" sourceRef="Service_FirstApproval" targetRef="ApprovalParallelGateway"/>
-    <bpmn2:userTask id="AllocationApproval" camunda:assignee="${assignTo}" name="Allocation Approval">
+    <bpmn2:sequenceFlow id="SequenceFlow_46" name="" sourceRef="Service_AllocationApproval" targetRef="ApprovalParallelGateway"/>
+    <bpmn2:userTask id="AllocationApproval" camunda:assignee="admin" name="Allocation Approval">
       <bpmn2:documentation>Approve order allocation (or not).</bpmn2:documentation>
       <bpmn2:extensionElements>
         <camunda:taskListener class="org.camunda.bpm.praisindo.tasklistener.TaskRefresh" event="assignment"/>
-        <camunda:formData>
-          <camunda:formField id="createdBy" label="Created By" type="string"/>
-          <camunda:formField id="assignTo" label="Assign To" type="string"/>
-          <camunda:formField id="jsonData" label="JSON Data" type="string"/>
-          <camunda:formField id="approved" label="Approve" type="boolean" defaultValue="true"/>
-          <camunda:formField id="svcAddress" label="Service Address" type="string" defaultValue="/AllocationAndOrder.svc/PTP_PRT_POST_OrderAndAllocation_Approve"/>
-          <camunda:formField id="svcMethod" label="Service Method" type="string" defaultValue="post"/>
-          <camunda:formField id="taskDetailUrl" type="string" defaultValue="/oms-order/approval"/>
-        </camunda:formData>
         <camunda:properties>
           <camunda:property/>
         </camunda:properties>
+        <camunda:formData>
+          <camunda:formField id="orderID" label="Order ID" type="string"/>
+          <camunda:formField id="approved" label="Approve" type="boolean" defaultValue="true"/>
+          <camunda:formField id="taskDetailUrl" label="Approval URL" type="string" defaultValue="/oms-order/approval"/>
+        </camunda:formData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_37</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_40</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_40" name="" sourceRef="AllocationApproval" targetRef="ApprovalGateway"/>
-    <bpmn2:serviceTask id="Service_SaveAllocation" camunda:class="org.camunda.bpm.praisindo.oms.AllocationAndOrder" name="Execute Save Allocation">
+    <bpmn2:serviceTask id="Service_SaveAllocation" camunda:class="org.camunda.bpm.praisindo.oms.SaveAllocation" name="Execute Save Allocation">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property/>
@@ -260,23 +244,19 @@
       <bpmn2:outgoing>SequenceFlow_37</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_37" name="" sourceRef="Service_SaveAllocation" targetRef="AllocationApproval"/>
-    <bpmn2:userTask id="UserTask_1" camunda:assignee="${assignTo}" name="Entry Allocation Order">
+    <bpmn2:userTask id="EntryAllocation" camunda:assignee="admin" name="Entry Allocation Order">
       <bpmn2:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="createdBy" label="Created By" type="string"/>
-          <camunda:formField id="assignTo" label="Assign To" type="string"/>
-          <camunda:formField id="jsonData" label="JSON Data" type="string"/>
-          <camunda:formField id="svcAddress" label="Service Address" type="string" defaultValue="/AllocationAndOrder.svc/PTP_PRT_PUT_OrderAndAllocation_Insert/0"/>
-          <camunda:formField id="svcMethod" label="Service Method" type="string" defaultValue="put"/>
-        </camunda:formData>
         <camunda:taskListener class="org.camunda.bpm.praisindo.tasklistener.TaskRefresh" event="create"/>
+        <camunda:formData>
+          <camunda:formField id="jsonData" label="JSON Data" type="string"/>
+        </camunda:formData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_valid</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_continue</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_38</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="UserTask_1" targetRef="Service_SaveAllocation"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="EntryAllocation" targetRef="Service_SaveAllocation"/>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="_Collaboration_4">
@@ -339,7 +319,7 @@
       <bpmndi:BPMNShape id="_BPMNShape_UserTask_9" bpmnElement="AllocationApproval">
         <dc:Bounds height="80.0" width="100.0" x="828.0" y="171.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_15" bpmnElement="Service_FirstApproval">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_15" bpmnElement="Service_AllocationApproval">
         <dc:Bounds height="80.0" width="100.0" x="1104.0" y="172.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_19" bpmnElement="SequenceFlow_19" sourceElement="_BPMNShape_ServiceTask_10" targetElement="_BPMNShape_ExclusiveGateway_4">
@@ -430,7 +410,7 @@
           <dc:Bounds height="22.0" width="29.0" x="112.0" y="290.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_23" bpmnElement="ServiceTask_5">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_23" bpmnElement="Service_MessageToBroker">
         <dc:Bounds height="80.0" width="100.0" x="540.0" y="794.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_UserTask_13" bpmnElement="OrderConfirmation">
@@ -449,7 +429,7 @@
           <dc:Bounds height="6.0" width="6.0" x="628.0" y="658.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_24" bpmnElement="Service_Confirmation">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_24" bpmnElement="Service_OrderConfirmation">
         <dc:Bounds height="80.0" width="100.0" x="852.0" y="619.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_16" bpmnElement="SequenceFlow_16" sourceElement="_BPMNShape_UserTask_13" targetElement="_BPMNShape_ServiceTask_24">
@@ -459,7 +439,7 @@
           <dc:Bounds height="6.0" width="6.0" x="797.0" y="659.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_14" bpmnElement="BrokerApproval">
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_14" bpmnElement="OrderApproval">
         <dc:Bounds height="80.0" width="100.0" x="1020.0" y="619.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_17" bpmnElement="SequenceFlow_17" sourceElement="_BPMNShape_ServiceTask_24" targetElement="_BPMNShape_UserTask_14">
@@ -476,7 +456,7 @@
           <dc:Bounds height="6.0" width="6.0" x="1120.0" y="659.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_25" bpmnElement="Service_Execute">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_25" bpmnElement="Service_ExecuteOrder">
         <dc:Bounds height="80.0" width="100.0" x="396.0" y="619.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_UserTask_10" targetElement="_BPMNShape_ServiceTask_25">
@@ -486,7 +466,7 @@
           <dc:Bounds height="6.0" width="6.0" x="341.0" y="659.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_26" bpmnElement="Service_LastApproval">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_26" bpmnElement="Service_OrderApproval">
         <dc:Bounds height="80.0" width="100.0" x="1200.0" y="619.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="_BPMNShape_ServiceTask_26" targetElement="_BPMNShape_EndEvent_6">
@@ -511,7 +491,7 @@
           <dc:Bounds height="6.0" width="6.0" x="587.0" y="755.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_27" bpmnElement="ServiceTask_1">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_27" bpmnElement="Service_MessageToDealer">
         <dc:Bounds height="80.0" width="100.0" x="1356.0" y="171.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_ParallelGateway_17" targetElement="_BPMNShape_ServiceTask_27">
@@ -529,7 +509,7 @@
           <dc:Bounds height="22.0" width="51.0" x="324.0" y="302.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_30" bpmnElement="ServiceTask_6">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_30" bpmnElement="Service_ValidationBlock">
         <dc:Bounds height="80.0" width="100.0" x="192.0" y="288.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_32" bpmnElement="SequenceFlow_32" sourceElement="_BPMNShape_ServiceTask_30" targetElement="_BPMNShape_EndEvent_7">
@@ -539,7 +519,7 @@
           <dc:Bounds height="6.0" width="6.0" x="165.0" y="328.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_18" bpmnElement="UserTask_2">
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_18" bpmnElement="UserConfirmation">
         <dc:Bounds height="80.0" width="100.0" x="252.0" y="396.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_35" bpmnElement="SequenceFlow_35" sourceElement="_BPMNShape_UserTask_18" targetElement="_BPMNShape_ExclusiveGateway_9">
@@ -595,7 +575,7 @@
           <dc:Bounds height="0.0" width="0.0" x="409.0" y="357.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_19" bpmnElement="UserTask_1">
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_19" bpmnElement="EntryAllocation">
         <dc:Bounds height="80.0" width="100.0" x="516.0" y="171.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_4" sourceElement="_BPMNShape_UserTask_19" targetElement="_BPMNShape_ServiceTask_11">

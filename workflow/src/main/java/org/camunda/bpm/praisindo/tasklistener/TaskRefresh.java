@@ -26,8 +26,7 @@ public class TaskRefresh implements TaskListener{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String created = format.format(task.getCreateTime());		
 		String assignee = task.getAssignee();
-		String processDefinitionId = task.getProcessDefinitionId();
-		String user = (String) task.getVariable("createdBy");		
+		String processDefinitionId = task.getProcessDefinitionId();				
 		
 		UIParams param = new UIParams();			
 		String nodeUrl = param.getNodeJs();
@@ -52,6 +51,7 @@ public class TaskRefresh implements TaskListener{
 				//untuk keperluan di service task
 				task.setVariable("taskID", taskID);
 				task.setVariable("taskName", taskName);
+				task.setVariable("assignee", assignee);
 				
 				//isi json object
 				jsonPush.put("taskID", taskID);
@@ -81,12 +81,12 @@ public class TaskRefresh implements TaskListener{
 									
 			}else {
 				String message = response.getResponseStatus().toString();
-				errorNotif.execute(user, message);
+				errorNotif.execute(assignee, message);
 				throw new Exception("Err("+response.getStatus()+") "+message);
 			}		
 		}catch(Exception e){
 			try {
-				errorNotif.execute(user, e.getMessage());
+				errorNotif.execute(assignee, e.getMessage());
 				throw new Exception("Err("+e.hashCode()+") " + e.getMessage());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

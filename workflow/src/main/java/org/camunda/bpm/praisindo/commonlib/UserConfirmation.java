@@ -15,8 +15,8 @@ public class UserConfirmation implements TaskListener{
 	private String nodeService = "/notif";
 	
 	public void notify(DelegateTask task) {
-		String errorMessagePushed = (String) task.getVariable("errorMessagePushed");
-		String creator = (String) task.getVariable("createdBy");
+		String message = (String) task.getVariable("message");
+		String creator = (String) task.getVariable("sysCreatedBy");
 		String taskID = (String) task.getId();
 	
 		JSONObject jsonPush = new JSONObject();
@@ -30,7 +30,7 @@ public class UserConfirmation implements TaskListener{
 			
 			jsonPush.put("requestto", creator);
 			jsonPush.put("channel", "userConfirmation");
-			jsonPush.put("message", errorMessagePushed);
+			jsonPush.put("message", message);
 			jsonPush.put("callBackUserTaskID", taskID);
 			
 			ClientResponse response = webResource.type("application/json").post(ClientResponse.class, jsonPush.toString());

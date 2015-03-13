@@ -15,8 +15,8 @@ public class ValidationMessage implements JavaDelegate{
 	private String nodeService = "/notif";
 	
 	public void execute(DelegateExecution execution) throws Exception {
-		String errorMessagePushed = (String) execution.getVariable("message");
-		String creator = (String) execution.getVariable("createdBy");
+		String message = (String) execution.getVariable("message");
+		String creator = (String) execution.getVariable("sysCreatedBy");
 	
 		JSONObject jsonPush = new JSONObject();
 		
@@ -29,7 +29,7 @@ public class ValidationMessage implements JavaDelegate{
 			
 			jsonPush.put("requestto", creator);
 			jsonPush.put("channel", "validationError");
-			jsonPush.put("message", errorMessagePushed);			
+			jsonPush.put("message", message);			
 			
 			ClientResponse response = webResource.type("application/json").post(ClientResponse.class, jsonPush.toString());
 			if (response.getStatus() != 200) {

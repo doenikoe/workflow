@@ -106,7 +106,7 @@ public class ComplianceCheckDelegate implements JavaDelegate{
 			jsonAllocation.put("Units",(String) execution.getVariable("Units"));
 			jsonAllocation.put("sysCreatedBy",(String) execution.getVariable("sysCreatedBy"));
 			jsonAllocation.put("sysModifiedBy",(String) execution.getVariable("sysModifiedBy"));
-			execution.setVariable("allocationData", jsonAllocation.toString());
+			execution.setVariable("allocationData", jsonAllocation.toString().replace("\\/", "/"));
 			
 		}catch(Exception e){
 			//LOGGER.info(e.getMessage());

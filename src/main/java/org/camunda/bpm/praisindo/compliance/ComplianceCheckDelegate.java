@@ -101,7 +101,7 @@ public class ComplianceCheckDelegate implements JavaDelegate{
 			jsonAllocation.put("OrderType",(String) execution.getVariable("OrderType"));
 			jsonAllocation.put("Price",(String) execution.getVariable("Price"));
 			jsonAllocation.put("Remarks",(String) execution.getVariable("Remarks"));
-			jsonAllocation.put("Tallocation",(String) execution.getVariable("Tallocation"));
+			jsonAllocation.put("TAllocation",(String) execution.getVariable("TAllocation"));
 			jsonAllocation.put("TOrderID",(String) execution.getVariable("TOrderID"));
 			jsonAllocation.put("Units",(String) execution.getVariable("Units"));
 			jsonAllocation.put("sysCreatedBy",(String) execution.getVariable("sysCreatedBy"));

@@ -104,22 +104,9 @@
     <bpmn2:startEvent id="StartEvent_1" name="Start (submit allocation)">
       <bpmn2:extensionElements>
         <camunda:formData>
-          <camunda:formField id="Date" label="Date" type="string"/>
-          <camunda:formField id="DealType" label="DealType" type="string"/>
-          <camunda:formField id="InstrumentCode" label="InstrumentCode" type="string"/>
-          <camunda:formField id="InvClass" label="InvClass" type="string"/>
-          <camunda:formField id="MFValueType" label="MFValueType" type="string"/>
-          <camunda:formField id="OrderNo" label="OrderNo" type="string" defaultValue="0"/>
-          <camunda:formField id="OrderPeriod" label="OrderPeriod" type="string"/>
-          <camunda:formField id="OrderType" label="OrderType" type="string"/>
-          <camunda:formField id="Price" label="Price" type="string"/>
-          <camunda:formField id="Remarks" label="Remarks" type="string"/>
-          <camunda:formField id="TAllocation" label="TAllocation" type="string"/>
-          <camunda:formField id="TOrderID" label="TOrderID" type="string" defaultValue="0"/>
-          <camunda:formField id="Units" label="Units" type="string"/>
-          <camunda:formField id="sysCreatedBy" label="sysCreatedBy" type="string"/>
-          <camunda:formField id="sysModifiedBy" label="sysModifiedBy" type="string"/>
+          <camunda:formField id="jsonData" label="Data" type="string"/>
         </camunda:formData>
+        <camunda:executionListener class="org.camunda.bpm.praisindo.executionlistener.ComplianceDataIsolation" event="end"/>
       </bpmn2:extensionElements>
       <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
     </bpmn2:startEvent>
@@ -153,10 +140,10 @@
     <bpmn2:userTask id="UserConfirmation" camunda:assignee="admin" name="User Confirmation">
       <bpmn2:documentation>Bypass validation warning (or not).</bpmn2:documentation>
       <bpmn2:extensionElements>
+        <camunda:taskListener class="org.camunda.bpm.praisindo.commonlib.UserConfirmation" event="assignment"/>
         <camunda:formData>
           <camunda:formField id="confirmed" label="Confirm" type="boolean" defaultValue="true"/>
         </camunda:formData>
-        <camunda:taskListener class="org.camunda.bpm.praisindo.commonlib.UserConfirmation" event="create"/>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_confirm</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_35</bpmn2:outgoing>
@@ -209,11 +196,6 @@
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_37" name="" sourceRef="Service_SaveAllocation" targetRef="AllocationApproval"/>
     <bpmn2:businessRuleTask id="ComplianceRule" camunda:class="org.camunda.bpm.praisindo.compliance.ComplianceCheckDelegate" name="Check Compliance">
-      <bpmn2:extensionElements>
-        <camunda:field name="validationData">
-          <camunda:string>TAllocation</camunda:string>
-        </camunda:field>
-      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
@@ -255,7 +237,6 @@
         <camunda:formData>
           <camunda:formField id="orderID" label="Order ID" type="string"/>
           <camunda:formField id="approved" label="Approve" type="boolean" defaultValue="true"/>
-          <camunda:formField id="taskDetailUrl" label="Approval URL" type="string" defaultValue="/oms-order/approval"/>
         </camunda:formData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_37</bpmn2:incoming>

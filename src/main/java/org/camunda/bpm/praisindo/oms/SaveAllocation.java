@@ -33,7 +33,7 @@ public class SaveAllocation implements JavaDelegate{
 		}
 		
 		String address = param.getOmsWs() + default_serviceName;	
-		String data = (String) execution.getVariable("allocationData");				
+		String data = (String) execution.getVariable("jsonData");				
 		
 		call.request(address, default_serviceMethod, data);
 		

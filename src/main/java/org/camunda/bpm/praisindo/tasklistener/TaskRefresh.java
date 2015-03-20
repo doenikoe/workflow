@@ -26,7 +26,8 @@ public class TaskRefresh implements TaskListener{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String created = format.format(task.getCreateTime());		
 		String assignee = task.getAssignee();
-		String processDefinitionId = task.getProcessDefinitionId();				
+		String processDefinitionId = task.getProcessDefinitionId();
+		String taskGroup = task.getAssignee();
 		
 		UIParams param = new UIParams();			
 		String nodeUrl = param.getNodeJs();
@@ -58,7 +59,7 @@ public class TaskRefresh implements TaskListener{
 				jsonPush.put("taskName", taskName);
 				jsonPush.put("created", created);
 				jsonPush.put("assignee", assignee);
-				jsonPush.put("processDefinitionName", processDefinitionName);
+				jsonPush.put("processDefinitionName", processDefinitionName);				
 				jsonPush.put("channel", "taskRefresh");																						
 				
 				//push json object to socket
@@ -68,6 +69,7 @@ public class TaskRefresh implements TaskListener{
 					ClientResponse nodeResponse = nodeResource.type("application/json").post(ClientResponse.class, jsonPush.toString());					
 					if (nodeResponse.getStatus() == 200) {
 						//insert to mongodb	
+						jsonPush.put("taskGroup", "AllocationApproval");
 						jsonPush.put("isCompleted", false);
 						taskUtil.insertTask(jsonPush);
 						jsonPush.remove("isCompleted");											

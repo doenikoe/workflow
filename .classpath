@@ -34,8 +34,5 @@
 			<attribute name="owner.project.facets" value="jboss.m2"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/xampp/tomcat8/lib/jersey-bundle-1.18.jar"/>
-	<classpathentry kind="lib" path="D:/javalib/mongo.jar"/>
-	<classpathentry kind="lib" path="D:/javalib/tools.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

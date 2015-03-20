@@ -12,7 +12,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Untuk memanggil web service IMS yang tidak mengembalikan value untuk diproses lebih lanjut
+ * Untuk memanggil web service IMS yang mengembalikan value untuk diproses lebih lanjut
  * 
  * @author M.DONI
  */

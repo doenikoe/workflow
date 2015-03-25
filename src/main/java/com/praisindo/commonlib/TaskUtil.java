@@ -25,9 +25,9 @@ public class TaskUtil {
 			collection = db.getCollection("task");
 			DBObject obj = (DBObject) JSON.parse(json.toString());
 			collection.insert(obj);			
-			LOGGER.info("New task has been inserted.");
+			LOGGER.info("\nNew task has been inserted.");
 		}catch(Exception e){
-			LOGGER.warning("Could not insert new task, "+e);
+			LOGGER.warning("\nCould not insert new task, "+e);
 		}		
 	}
 	
@@ -39,9 +39,9 @@ public class TaskUtil {
 			collection = db.getCollection("task");
 			BasicDBObject searchQuery = new BasicDBObject().append("taskID", taskID);															 									 
 			collection.update(searchQuery, document);
-			LOGGER.info("Task has been completed.");
+			LOGGER.info("\nTask has been updated.");
 		}catch(Exception e){
-			LOGGER.warning("Could not update the task, "+e);
+			LOGGER.warning("\nCould not update the task, "+e);
 		}
 	}
 }

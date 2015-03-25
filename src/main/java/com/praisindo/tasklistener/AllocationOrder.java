@@ -57,20 +57,28 @@ public class AllocationOrder implements TaskListener{
 																							
 			orderList.remove(i);			
 			task.setVariable("OrderList", orderList);		
+			JSONObject jsonPush = new JSONObject();
 			
 			//socket push
-			taskPush.notify();
-			JSONObject jsonPush = new JSONObject();
-			jsonPush = taskPush.getDataBundle();
-			
+			try{
+				taskPush.notify(task);				
+				jsonPush = taskPush.getDataBundle();
+			}catch(Exception e){
+				throw new Exception(e.getMessage());
+			}
+						
 			//mongodb push add data variable
-			BasicDBObject newDocument = new BasicDBObject();
-			newDocument.append("$set", new BasicDBObject().append("variables", variables));
-			taskUtil.updateTask(jsonPush.getString("taskID"), newDocument);
+			try{
+				BasicDBObject newDocument = new BasicDBObject();
+				newDocument.append("$set", new BasicDBObject().append("variables", variables.toString()));
+				taskUtil.updateTask(task.getId(), newDocument);
+			}catch(Exception e){
+				throw new Exception(e.getMessage());
+			}
 																	
 		}catch(Exception e){
 			try {
-				throw new Exception("");
+				throw new Exception(e.getMessage());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

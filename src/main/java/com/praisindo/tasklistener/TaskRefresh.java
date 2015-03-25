@@ -60,7 +60,7 @@ public class TaskRefresh implements TaskListener{
 				ClientResponse nodeResponse = nodeResource.type("application/json").post(ClientResponse.class, jsonPush.toString());					
 				if (nodeResponse.getStatus() == 200) {
 					//insert to mongoDB
-					jsonPush.put("variables", "");
+					jsonPush.put("variables", new JSONObject("{}"));
 					jsonPush.put("isCompleted", false);
 					taskUtil.insertTask(jsonPush);
 					//

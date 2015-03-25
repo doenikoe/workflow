@@ -1,4 +1,4 @@
-package org.camunda.bpm.praisindo.commonlib;
+package com.praisindo.commonlib;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -1,23 +1,17 @@
-package org.camunda.bpm.praisindo.commonlib;
+package com.praisindo.commonlib;
 
-import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 
+import com.praisindo.commonlib.UIParams;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import org.camunda.bpm.praisindo.commonlib.UIParams;
-
-public class ValidationMessage implements JavaDelegate{
+public class AppMessage{
 	
 	private String nodeService = "/notif";
 	
-	public void execute(DelegateExecution execution) throws Exception {
-		String message = (String) execution.getVariable("message");
-		String creator = (String) execution.getVariable("sysCreatedBy");
-	
+	public void notification(String recipient, String message) {				
 		JSONObject jsonPush = new JSONObject();
 		
 		UIParams param = new UIParams();
@@ -27,8 +21,8 @@ public class ValidationMessage implements JavaDelegate{
 			Client client = Client.create();
 			WebResource webResource = client.resource(nodeUrl + nodeService);
 			
-			jsonPush.put("requestto", creator);
-			jsonPush.put("channel", "validationError");
+			jsonPush.put("requestto", recipient);
+			jsonPush.put("channel", "applicationMessage");
 			jsonPush.put("message", message);			
 			
 			ClientResponse response = webResource.type("application/json").post(ClientResponse.class, jsonPush.toString());
@@ -37,7 +31,12 @@ public class ValidationMessage implements JavaDelegate{
 				throw new Exception("Err("+response.getStatus()+") "+body);
 			}
 		}catch(Exception e){
-			throw new Exception("Err("+e.hashCode()+") " + e.getMessage());
+			try {
+				throw new Exception("Err("+e.hashCode()+") " + e.getMessage());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }

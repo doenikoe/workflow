@@ -1,10 +1,9 @@
-package org.camunda.bpm.praisindo.commonlib;
+package com.praisindo.commonlib;
 
 import java.util.Date;
 
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
-import org.camunda.bpm.engine.impl.util.json.JSONArray;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 
 import com.sun.jersey.api.client.Client;
@@ -12,13 +11,13 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Untuk memanggil web service IMS yang mengembalikan value untuk diproses lebih lanjut
+ * Untuk memanggil web service IMS yang tidak mengembalikan value untuk diproses lebih lanjut
  * 
  * @author M.DONI
  */
-public class APICallWithReturn{
+public class APICallNoReturn implements TaskListener{
 	
-	public String request(String address, String method, String data) throws Exception{
+	public void request(String address, String method, String data) throws Exception{
 		String result = "";	
 		Client client = Client.create();
 		
@@ -31,14 +30,14 @@ public class APICallWithReturn{
 			String errorCode = wsResponse.getString("ErrorCode");
 			Boolean isSuccess = wsResponse.getBoolean("IsSuccess");
 			String message = wsResponse.getString("Message");
-			if(wsResponse.has("Result"))
-				result = wsResponse.getString("Result");						
+			String solutionCode = wsResponse.getString("SolutionCode");						
 		}else{
 			String body = response.getEntity(String.class);
 			throw new Exception("Err("+response.getStatus()+") "+body);
 		}
-		
-		return result;
 	}
-			
+	
+	public void notify(DelegateTask task) {
+		
+	}
 }

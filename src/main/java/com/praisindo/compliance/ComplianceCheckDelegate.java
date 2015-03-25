@@ -1,13 +1,13 @@
-package org.camunda.bpm.praisindo.compliance;
+package com.praisindo.compliance;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.Expression;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.praisindo.commonlib.UIParams;
-import org.camunda.bpm.praisindo.executionlistener.ComplianceDataIsolation;
 import org.camunda.bpm.engine.impl.util.json.JSONArray;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 
+import com.praisindo.commonlib.UIParams;
+import com.praisindo.executionlistener.ComplianceDataIsolation;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -34,12 +34,10 @@ public class ComplianceCheckDelegate implements JavaDelegate{
 		
 		String dataRequest = "";
 		//Check apakah ada field injection validationData
-		//Jika ada, maka dilakukan pemisahan data untuk validasi 
 		if(validationData != null){										
 			JSONArray jsonData = new JSONArray(execution.getVariable("jsonData").toString());			
 			String key = validationData.getValue(execution).toString();								
-			dataRequest = isolation.getValidationData(jsonData, key).toString();
-		//Jika tidak ada, ambil value dari variable validationData yang ada di awal process	
+			dataRequest = isolation.getValidationData(jsonData, key).toString();	
 		}else{
 			dataRequest = execution.getVariable("validationData").toString();
 		}

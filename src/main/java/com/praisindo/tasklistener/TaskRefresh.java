@@ -1,45 +1,37 @@
-package org.camunda.bpm.praisindo.tasklistener;
+package com.praisindo.tasklistener;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.swing.text.DateFormatter;
-
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
-import org.camunda.bpm.praisindo.commonlib.AppMessage;
-import org.camunda.bpm.praisindo.commonlib.TaskUtil;
-import org.camunda.bpm.praisindo.commonlib.UIParams;
-
+import com.praisindo.commonlib.AppMessage;
+import com.praisindo.commonlib.TaskUtil;
+import com.praisindo.commonlib.UIParams;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 public class TaskRefresh implements TaskListener{	
 	private String nodeService = "/notif";
+	private UIParams param = new UIParams();
+	private AppMessage appMessage = new AppMessage();
+	private TaskUtil taskUtil = new TaskUtil();
+	private JSONObject bundle = new JSONObject();
 	
 	public void notify(DelegateTask task) {
-		String taskID = task.getId();
-		String taskName = task.getName();		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
+		String taskID = task.getId();
+		String taskName = task.getName();				
 		String created = format.format(task.getCreateTime());		
 		String assignee = task.getAssignee();
-		String processDefinitionId = task.getProcessDefinitionId();
-		String taskGroup = task.getAssignee();
-		
-		UIParams param = new UIParams();			
+		String processDefinitionId = task.getProcessDefinitionId();							
 		String nodeUrl = param.getNodeJs();
 		
-		JSONObject jsonPush = new JSONObject();
-		
-		AppMessage errorNotif = new AppMessage();
-		
-		TaskUtil taskUtil = new TaskUtil();
-		
-		//Get process definition information
-		try{
+		JSONObject jsonPush = new JSONObject();								
+														
+		try{			
+			//invoke rest-engine camunda untuk mengambil informasi task 
 			Client client = Client.create();
 			WebResource webResource = client.resource(param.camunda + "/process-definition/" + processDefinitionId);
 			ClientResponse response = webResource.get(ClientResponse.class);									
@@ -53,42 +45,38 @@ public class TaskRefresh implements TaskListener{
 				task.setVariable("taskID", taskID);
 				task.setVariable("taskName", taskName);
 				task.setVariable("assignee", assignee);
-				
-				//isi json object
+				//
+
 				jsonPush.put("taskID", taskID);
 				jsonPush.put("taskName", taskName);
 				jsonPush.put("created", created);
 				jsonPush.put("assignee", assignee);
 				jsonPush.put("processDefinitionName", processDefinitionName);				
-				jsonPush.put("channel", "taskRefresh");																						
+				jsonPush.put("channel", "taskRefresh");																									
 				
-				//push json object to socket
-				try{
-					Client nodeClient = Client.create();					
-					WebResource nodeResource = nodeClient.resource(nodeUrl + nodeService);
-					ClientResponse nodeResponse = nodeResource.type("application/json").post(ClientResponse.class, jsonPush.toString());					
-					if (nodeResponse.getStatus() == 200) {
-						//insert to mongodb	
-						jsonPush.put("taskGroup", "AllocationApproval");
-						jsonPush.put("isCompleted", false);
-						taskUtil.insertTask(jsonPush);
-						jsonPush.remove("isCompleted");											
-					}else{ 					
-						String body = nodeResponse.getEntity(String.class);
-						throw new Exception("Err("+nodeResponse.getStatus()+") "+body);
-					}
-				}catch(Exception e){
-					throw new Exception("Err("+e.hashCode()+") " + e.getMessage());
+				//push json object to socket			
+				Client nodeClient = Client.create();					
+				WebResource nodeResource = nodeClient.resource(nodeUrl + nodeService);
+				ClientResponse nodeResponse = nodeResource.type("application/json").post(ClientResponse.class, jsonPush.toString());					
+				if (nodeResponse.getStatus() == 200) {
+					//insert to mongoDB
+					jsonPush.put("variables", "");
+					jsonPush.put("isCompleted", false);
+					taskUtil.insertTask(jsonPush);
+					//
+				}else{ 					
+					String body = nodeResponse.getEntity(String.class);
+					throw new Exception("Err("+nodeResponse.getStatus()+") "+body);
 				}
-									
+				//									
 			}else {
 				String message = response.getResponseStatus().toString();
-				errorNotif.execute(assignee, message);
+				appMessage.notification(assignee, message);
 				throw new Exception("Err("+response.getStatus()+") "+message);
 			}		
-		}catch(Exception e){
+		}catch(Exception e){			
 			try {
-				errorNotif.execute(assignee, e.getMessage());
+				appMessage.notification(assignee, e.getMessage());
 				throw new Exception("Err("+e.hashCode()+") " + e.getMessage());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -96,4 +84,13 @@ public class TaskRefresh implements TaskListener{
 			}
 		}
 	}
+	
+	public void setDataBundle(JSONObject json){
+		this.bundle = json;
+	}
+	
+	public JSONObject getDataBundle(){
+		return this.bundle;
+	}
+	
 }

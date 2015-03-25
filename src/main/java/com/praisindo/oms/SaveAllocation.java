@@ -1,19 +1,24 @@
-package org.camunda.bpm.praisindo.oms;
+package com.praisindo.oms;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.Expression;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.praisindo.commonlib.APICallWithReturn;
-import org.camunda.bpm.praisindo.commonlib.TaskUtil;
-import org.camunda.bpm.praisindo.commonlib.UIParams;
+import org.camunda.bpm.engine.impl.util.json.JSONArray;
+import org.camunda.bpm.engine.impl.util.json.JSONObject;
 
 import com.mongodb.BasicDBObject;
+import com.praisindo.commonlib.APICallWithReturn;
+import com.praisindo.commonlib.TaskUtil;
+import com.praisindo.commonlib.UIParams;
 
-public class OrderApproval implements JavaDelegate{
-	private String default_serviceName = "/AllocationAndOrder.svc/PTP_PRT_POST_OrderAndAllocation_ApproveBrokerConfirmation";
-	private String default_serviceMethod = "POST";
+public class SaveAllocation implements JavaDelegate{
+	private String default_serviceName = "/AllocationAndOrder.svc/PTP_PRT_PUT_OrderAndAllocation_Insert/0";
+	private String default_serviceMethod = "PUT";
 	private APICallWithReturn call = new APICallWithReturn();	
-	private UIParams param = new UIParams();	
+	private UIParams param = new UIParams();
 	private TaskUtil taskUtil = new TaskUtil();
 	private Expression serviceName;
 	private Expression serviceMethod;
@@ -35,12 +40,22 @@ public class OrderApproval implements JavaDelegate{
 		String address = param.getOmsWs() + default_serviceName;	
 		String data = (String) execution.getVariable("jsonData");				
 		
-		call.request(address, default_serviceMethod, data);
+		String result = call.request(address, default_serviceMethod, data);
+		JSONArray json = new JSONArray(result);		
+		List<String> listResult = new ArrayList<String>();
+		for(int i=0; i<json.length(); i++){
+			JSONObject obj = new JSONObject(json.get(i).toString());
+			listResult.add(obj.get("TOrderID").toString());
+		}		
+		execution.setVariable("OrderList", listResult);
+		execution.setVariable("OrderQuantity", listResult.size());
 		
 		//Update task status jadi completed
 		String taskID = (String) execution.getVariable("taskID");
 		BasicDBObject newDocument = new BasicDBObject();
 		newDocument.append("$set", new BasicDBObject().append("isCompleted", true));
-		taskUtil.updateTask(taskID, newDocument);
+		taskUtil.updateTask(taskID, newDocument);			
+		
 	}
+
 }

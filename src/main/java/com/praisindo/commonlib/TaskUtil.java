@@ -1,4 +1,4 @@
-package org.camunda.bpm.praisindo.commonlib;
+package com.praisindo.commonlib;
 
 import java.util.logging.Logger;
 
@@ -15,8 +15,7 @@ public class TaskUtil {
 	
 	private UIParams param = new UIParams();
 	private DB db = param.db;
-	private DBCollection collection;
-	
+	private DBCollection collection;	
 		
 	/**
 	 * Insert task baru ke mongoDB

@@ -1,14 +1,14 @@
-package org.camunda.bpm.praisindo.commonlib;
+package com.praisindo.commonlib;
 
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 
+import com.praisindo.commonlib.UIParams;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import org.camunda.bpm.praisindo.commonlib.UIParams;
 
 public class UserConfirmation implements TaskListener{
 	

@@ -1,14 +1,14 @@
-package org.camunda.bpm.praisindo.executionlistener;
+package com.praisindo.executionlistener;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
-import org.camunda.bpm.praisindo.commonlib.UIParams;
 
+import com.praisindo.commonlib.UIParams;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-public class SocketConnectionCheck implements ExecutionListener {			
+public class SocketCheck implements ExecutionListener {			
 	public void notify(DelegateExecution execution) throws Exception{				
 		UIParams param = new UIParams();			
 		String nodeUrl = param.getNodeJs();																																	

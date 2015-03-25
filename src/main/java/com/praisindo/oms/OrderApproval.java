@@ -1,16 +1,16 @@
-package org.camunda.bpm.praisindo.oms;
+package com.praisindo.oms;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.Expression;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.praisindo.commonlib.APICallWithReturn;
-import org.camunda.bpm.praisindo.commonlib.TaskUtil;
-import org.camunda.bpm.praisindo.commonlib.UIParams;
 
 import com.mongodb.BasicDBObject;
+import com.praisindo.commonlib.APICallWithReturn;
+import com.praisindo.commonlib.TaskUtil;
+import com.praisindo.commonlib.UIParams;
 
-public class OrderConfirmation implements JavaDelegate{
-	private String default_serviceName = "/AllocationAndOrder.svc/PTP_PRT_POST_Execution_Update";
+public class OrderApproval implements JavaDelegate{
+	private String default_serviceName = "/AllocationAndOrder.svc/PTP_PRT_POST_OrderAndAllocation_ApproveBrokerConfirmation";
 	private String default_serviceMethod = "POST";
 	private APICallWithReturn call = new APICallWithReturn();	
 	private UIParams param = new UIParams();	

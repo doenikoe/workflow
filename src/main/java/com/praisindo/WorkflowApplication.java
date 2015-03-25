@@ -1,4 +1,4 @@
-package org.camunda.bpm.praisindo;
+package com.praisindo;
 
 import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.application.impl.ServletProcessApplication;

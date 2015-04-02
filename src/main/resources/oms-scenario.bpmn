@@ -233,6 +233,9 @@
         <camunda:properties>
           <camunda:property/>
         </camunda:properties>
+        <camunda:formData>
+          <camunda:formField id="IsApproved" label="IsApproved" type="boolean"/>
+        </camunda:formData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_37</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_40</bpmn2:outgoing>

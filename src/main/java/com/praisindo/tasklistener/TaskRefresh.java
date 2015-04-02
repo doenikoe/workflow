@@ -3,6 +3,7 @@ package com.praisindo.tasklistener;
 import java.text.SimpleDateFormat;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
+import org.camunda.bpm.engine.impl.util.json.JSONArray;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 import com.praisindo.commonlib.AppMessage;
 import com.praisindo.commonlib.TaskUtil;
@@ -60,7 +61,7 @@ public class TaskRefresh implements TaskListener{
 				ClientResponse nodeResponse = nodeResource.type("application/json").post(ClientResponse.class, jsonPush.toString());					
 				if (nodeResponse.getStatus() == 200) {
 					//insert to mongoDB
-					jsonPush.put("variables", new JSONObject("{}"));
+					jsonPush.put("variables", new JSONArray("[]"));
 					jsonPush.put("isCompleted", false);
 					taskUtil.insertTask(jsonPush);
 					//

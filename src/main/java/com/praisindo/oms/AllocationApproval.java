@@ -33,7 +33,7 @@ public class AllocationApproval implements JavaDelegate{
 		}
 		
 		String address = param.getOmsWs() + default_serviceName;	
-		String data = (String) execution.getVariable("orderID");				
+		String data = (String) execution.getVariableLocal("TOrderID");				
 		
 		call.request(address, default_serviceMethod, data);
 		

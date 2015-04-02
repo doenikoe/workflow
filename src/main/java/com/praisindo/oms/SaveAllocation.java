@@ -48,14 +48,7 @@ public class SaveAllocation implements JavaDelegate{
 			listResult.add(obj.get("TOrderID").toString());
 		}		
 		execution.setVariable("OrderList", listResult);
-		execution.setVariable("OrderQuantity", listResult.size());
-		
-		//Update task status jadi completed
-		String taskID = (String) execution.getVariable("taskID");
-		BasicDBObject newDocument = new BasicDBObject();
-		newDocument.append("$set", new BasicDBObject().append("isCompleted", true));
-		taskUtil.updateTask(taskID, newDocument);			
-		
+		execution.setVariable("OrderQuantity", listResult.size());							
 	}
 
 }

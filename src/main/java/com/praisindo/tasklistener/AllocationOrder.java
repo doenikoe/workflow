@@ -25,7 +25,7 @@ public class AllocationOrder implements TaskListener{
 	private TaskUtil taskUtil = new TaskUtil();
 
 	public void notify(DelegateTask task){
-		JSONObject variables = new JSONObject();
+		JSONArray variables = new JSONArray();
 		
 		List<String> orderList = new ArrayList<String>();
 		orderList = (List<String>) task.getVariable("OrderList");
@@ -40,24 +40,36 @@ public class AllocationOrder implements TaskListener{
 			
 			for(int j=0; j<resultArray.length(); j++){
 				JSONObject obj = new JSONObject(resultArray.get(j).toString());					
-				variables.put("TOrderID", obj.get("TOrderID"));
-				variables.put("DealType", obj.get("DealType"));
-				variables.put("InstrumentCode", obj.get("InstrumentCode"));
-				variables.put("OrderType", obj.get("OrderType"));
-				variables.put("OrderPeriod", obj.get("OrderPeriod"));
-				variables.put("Date", obj.get("Date"));
-				variables.put("Price", obj.get("Price"));
-				variables.put("Status", obj.get("Status"));
-				variables.put("Remarks", obj.get("Remarks"));
-									
-				task.setVariableLocal("LocalVariables",variables.toString());
-				task.setVariableLocal("IsApproved", "i-"+false);
-				task.setVariableLocal("Button", "Approve|Unapprove");									
-			}				
-																							
+				variables.put(new JSONObject("{_ordinal:1, name:TOrderID, dataType:String, value:"+obj.get("TOrderID")+", editable:false, hidden:false}"));
+				variables.put(new JSONObject("{_ordinal:2, name:DealType, dataType:String, value:"+obj.get("DealType")+", editable:false, hidden:false}"));
+				variables.put(new JSONObject("{_ordinal:3, name:InstrumentCode, dataType:String, value:"+obj.get("InstrumentCode")+", editable:false, hidden:false}"));
+				variables.put(new JSONObject("{_ordinal:4, name:OrderType, dataType:String, value:"+obj.get("OrderType")+", editable:false, hidden:false}"));
+				variables.put(new JSONObject("{_ordinal:5, name:OrderPeriod, dataType:String, value:"+obj.get("OrderPeriod")+", editable:false, hidden:false}"));
+				variables.put(new JSONObject("{_ordinal:6, name:Date, dataType:Date, value:\""+obj.get("Date")+"\", editable:false, hidden:false}"));			
+				variables.put(new JSONObject("{_ordinal:7, name:Price, dataType:float, value:"+obj.get("Price")+", editable:false, hidden:false}"));
+				variables.put(new JSONObject("{_ordinal:8, name:Unit, dataType:float, value:"+obj.get("Units")+", editable:false, hidden:false}"));
+				variables.put(new JSONObject("{_ordinal:9, name:Status, dataType:String, value:"+obj.get("Status")+", editable:false, hidden:false}"));
+				variables.put(new JSONObject("{_ordinal:10, name:Remarks, dataType:String, value:\""+obj.get("Remarks")+"\", editable:false, hidden:false}"));																									
+			}										
+			
+			task.setVariableLocal("Records",variables.toString());
+			
+			JSONArray jsonButton = new JSONArray();
+			jsonButton.put(new JSONObject("{name:Approve, value:true}"));
+			jsonButton.put(new JSONObject("{name:Unapprove, value:false}"));
+			task.setVariableLocal("Button", jsonButton.toString());
+			
+			JSONArray jsonForm = new JSONArray();
+			jsonForm.put(new JSONObject("{name:IsApproved, dataType:boolean}"));			
+			task.setVariableLocal("FormData", jsonForm.toString());
+			
 			orderList.remove(i);			
 			task.setVariable("OrderList", orderList);		
 			JSONObject jsonPush = new JSONObject();
+			
+			JSONArray jsonOrder = new JSONArray();
+			jsonOrder.put(new JSONObject("{TOrderID:"+TOrderID+"}"));			
+			task.setVariableLocal("TOrderID",jsonOrder.toString());
 			
 			//socket push
 			try{

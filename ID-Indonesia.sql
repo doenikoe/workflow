@@ -1,10 +1,10 @@
-REPLACE INTO /*TABLE_PREFIX*/t_country (pk_c_code, s_name, s_slug) VALUES 
+REPLACE INTO oc_t_country (pk_c_code, s_name, s_slug) VALUES 
 ('ID', 'Indonesia', 'indonesia');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781431, 'id', 'Aceh', 1, 'aceh');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274165, 781431, 'id', 'Aceh Besar', 1, 'aceh-besar'),
 (274166, 781431, 'id', 'Aceh Jaya', 1, 'aceh-jaya'),
 (274167, 781431, 'id', 'Aceh Singkil', 1, 'aceh-singkil'),
@@ -29,10 +29,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274186, 781431, 'id', 'Sabang', 1, 'sabang'),
 (274187, 781431, 'id', 'Subulussalam', 1, 'subulussalam');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781432, 'id', 'Bali', 1, 'bali');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274188, 781432, 'id', 'Badung', 1, 'badung'),
 (274189, 781432, 'id', 'Bangli', 1, 'bangli'),
 (274190, 781432, 'id', 'Buleleng', 1, 'buleleng'),
@@ -43,10 +43,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274195, 781432, 'id', 'Tabanan', 1, 'tabanan'),
 (274196, 781432, 'id', 'Denpasar', 1, 'denpasar');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781433, 'id', 'Bangka Belitung Islands', 1, 'bangka-belitung-islands');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274197, 781433, 'id', 'Bangka', 1, 'bangka'),
 (274198, 781433, 'id', 'Belitung', 1, 'belitung'),
 (274199, 781433, 'id', 'Central Bangka', 1, 'central-bangka'),
@@ -55,10 +55,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274202, 781433, 'id', 'West Bangka', 1, 'west-bangka'),
 (274203, 781433, 'id', 'Pangkal Pinang', 1, 'pangkal-pinang');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781434, 'id', 'Banten', 1, 'banten');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274204, 781434, 'id', 'Lebak', 1, 'lebak'),
 (274205, 781434, 'id', 'Pandeglang', 1, 'pandeglang'),
 (274206, 781434, 'id', 'Serang', 1, 'serang'),
@@ -66,10 +66,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274208, 781434, 'id', 'South Tangerang', 1, 'south-tangerang'),
 (274209, 781434, 'id', 'Tangerang', 1, 'tangerang');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781435, 'id', 'Bengkulu', 1, 'bengkulu');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274210, 781435, 'id', 'Central Bengkulu', 1, 'central-bengkulu'),
 (274211, 781435, 'id', 'Kaur', 1, 'kaur'),
 (274212, 781435, 'id', 'Kepahiang', 1, 'kepahiang'),
@@ -81,10 +81,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274218, 781435, 'id', 'South Bengkulu', 1, 'south-bengkulu'),
 (274219, 781435, 'id', 'Bengkulu', 1, 'bengkulu');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781436, 'id', 'Central Java', 1, 'central-java');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274220, 781436, 'id', 'Banjarnegara', 1, 'banjarnegara'),
 (274221, 781436, 'id', 'Banyumas', 1, 'banyumas'),
 (274222, 781436, 'id', 'Batang', 1, 'batang'),
@@ -117,10 +117,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274249, 781436, 'id', 'Salatiga', 1, 'salatiga'),
 (274250, 781436, 'id', 'Kudus', 1, 'kudus');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781437, 'id', 'Central Kalimantan', 1, 'central-kalimantan');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274251, 781437, 'id', 'East Barito', 1, 'east-barito'),
 (274252, 781437, 'id', 'East Kotawaringin', 1, 'east-kotawaringin'),
 (274253, 781437, 'id', 'Gunung Mas', 1, 'gunung-mas'),
@@ -136,10 +136,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274263, 781437, 'id', 'West Kotawaringin', 1, 'west-kotawaringin'),
 (274264, 781437, 'id', 'Palangkaraya', 1, 'palangkaraya');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781438, 'id', 'Central Sulawesi', 1, 'central-sulawesi');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274265, 781438, 'id', 'Banggai', 1, 'banggai'),
 (274266, 781438, 'id', 'Banggai Islands', 1, 'banggai-islands'),
 (274267, 781438, 'id', 'Buol', 1, 'buol'),
@@ -152,10 +152,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274274, 781438, 'id', 'Toli-Toli', 1, 'toli-toli'),
 (274275, 781438, 'id', 'Palu', 1, 'palu');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781439, 'id', 'East Java', 1, 'east-java');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274276, 781439, 'id', 'Bangkalan Regency', 1, 'bangkalan-regency'),
 (274277, 781439, 'id', 'Banyuwangi', 1, 'banyuwangi'),
 (274278, 781439, 'id', 'Blitar', 1, 'blitar'),
@@ -188,10 +188,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274305, 781439, 'id', 'Nganjuk', 1, 'nganjuk'),
 (274306, 781439, 'id', 'Pamekasan', 1, 'pamekasan');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781440, 'id', 'East Kalimantan', 1, 'east-kalimantan');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274307, 781440, 'id', 'Berau', 1, 'berau'),
 (274308, 781440, 'id', 'Bulungan', 1, 'bulungan'),
 (274309, 781440, 'id', 'East Kutai', 1, 'east-kutai'),
@@ -207,10 +207,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274319, 781440, 'id', 'Samarinda', 1, 'samarinda'),
 (274320, 781440, 'id', 'Balikpapan', 1, 'balikpapan');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781441, 'id', 'East Nusa Tenggara', 1, 'east-nusa-tenggara');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274321, 781441, 'id', 'Alor', 1, 'alor'),
 (274322, 781441, 'id', 'Belu', 1, 'belu'),
 (274323, 781441, 'id', 'Central Sumba', 1, 'central-sumba'),
@@ -232,27 +232,27 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274339, 781441, 'id', 'West Manggarai', 1, 'west-manggarai'),
 (274340, 781441, 'id', 'West Sumba', 1, 'west-sumba');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781442, 'id', 'Gorontalo', 1, 'gorontalo');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274341, 781442, 'id', 'Boalemo', 1, 'boalemo'),
 (274342, 781442, 'id', 'Bone Bolango', 1, 'bone-bolango'),
 (274343, 781442, 'id', 'Gorontalo', 1, 'gorontalo'),
 (274344, 781442, 'id', 'North Gorontalo', 1, 'north-gorontalo'),
 (274345, 781442, 'id', 'Pahuwato', 1, 'pahuwato');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781443, 'id', 'Jakarta', 1, 'jakarta');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274347, 781443, 'id', 'Jakarta', 1, 'jakarta'),
 (274346, 781443, 'id', 'Seribu Islands', 1, 'seribu-islands');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781444, 'id', 'Jambi', 1, 'jambi');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274348, 781444, 'id', 'Batang Hari', 1, 'batang-hari'),
 (274349, 781444, 'id', 'Bungo', 1, 'bungo'),
 (274350, 781444, 'id', 'Kerinci', 1, 'kerinci'),
@@ -265,10 +265,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274357, 781444, 'id', 'Jambi', 1, 'jambi'),
 (274358, 781444, 'id', 'Sungai Penuh', 1, 'sungai-penuh');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781445, 'id', 'Lampung', 1, 'lampung');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274359, 781445, 'id', 'Central Lampung', 1, 'central-lampung'),
 (274360, 781445, 'id', 'East Lampung', 1, 'east-lampung'),
 (274361, 781445, 'id', 'Mesuji', 1, 'mesuji'),
@@ -284,10 +284,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274371, 781445, 'id', 'Metro', 1, 'metro'),
 (274372, 781445, 'id', 'Bandar Lampung', 1, 'bandar-lampung');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781446, 'id', 'Maluku', 1, 'maluku');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274373, 781446, 'id', 'Aru Islands', 1, 'aru-islands'),
 (274374, 781446, 'id', 'Buru', 1, 'buru'),
 (274375, 781446, 'id', 'Central Maluku', 1, 'central-maluku'),
@@ -300,10 +300,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274382, 781446, 'id', 'Ambon', 1, 'ambon'),
 (274383, 781446, 'id', 'Tual', 1, 'tual');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781447, 'id', 'North Maluku', 1, 'north-maluku');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274384, 781447, 'id', 'Central Halmahera', 1, 'central-halmahera'),
 (274385, 781447, 'id', 'East Halmahera', 1, 'east-halmahera'),
 (274386, 781447, 'id', 'Morotai Islands', 1, 'morotai-islands'),
@@ -314,10 +314,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274391, 781447, 'id', 'Ternate', 1, 'ternate'),
 (274392, 781447, 'id', 'Tidore Islands', 1, 'tidore-islands');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781448, 'id', 'North Sulawesi', 1, 'north-sulawesi');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274393, 781448, 'id', 'Bolaang Mongondow Regency', 1, 'bolaang-mongondow-regency'),
 (274394, 781448, 'id', 'East Bolaang Mongondow Regency', 1, 'east-bolaang-mongondow-regency'),
 (274395, 781448, 'id', 'Minahasa Regency', 1, 'minahasa-regency'),
@@ -334,10 +334,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274406, 781448, 'id', 'Tomohon', 1, 'tomohon'),
 (274407, 781448, 'id', 'Manado', 1, 'manado');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781449, 'id', 'North Sumatra', 1, 'north-sumatra');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274408, 781449, 'id', 'Asahan', 1, 'asahan'),
 (274409, 781449, 'id', 'Batubara', 1, 'batubara'),
 (274410, 781449, 'id', 'Central Tapanuli', 1, 'central-tapanuli'),
@@ -372,10 +372,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274439, 781449, 'id', 'Pematangsiantar', 1, 'pematangsiantar'),
 (274440, 781449, 'id', 'Deli Serdang', 1, 'deli-serdang');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781450, 'id', 'Papua', 1, 'papua');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274441, 781450, 'id', 'Asmat', 1, 'asmat'),
 (274442, 781450, 'id', 'Biak Numfor', 1, 'biak-numfor'),
 (274443, 781450, 'id', 'Boven Digoel', 1, 'boven-digoel'),
@@ -405,10 +405,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274467, 781450, 'id', 'Yapen Islands', 1, 'yapen-islands'),
 (274468, 781450, 'id', 'Jayapura', 1, 'jayapura');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781451, 'id', 'Riau', 1, 'riau');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274469, 781451, 'id', 'Bengkalis Regency', 1, 'bengkalis-regency'),
 (274470, 781451, 'id', 'Indragiri Hilir', 1, 'indragiri-hilir'),
 (274471, 781451, 'id', 'Indragiri Hulu Regency', 1, 'indragiri-hulu-regency'),
@@ -422,10 +422,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274479, 781451, 'id', 'Dumai', 1, 'dumai'),
 (274480, 781451, 'id', 'Pekanbaru', 1, 'pekanbaru');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781452, 'id', 'Riau Islands', 1, 'riau-islands');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274481, 781452, 'id', 'Anambas Islands', 1, 'anambas-islands'),
 (274482, 781452, 'id', 'Bintan', 1, 'bintan'),
 (274483, 781452, 'id', 'Karimun', 1, 'karimun'),
@@ -434,10 +434,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274486, 781452, 'id', 'Batam', 1, 'batam'),
 (274487, 781452, 'id', 'Tanjung Pinang', 1, 'tanjung-pinang');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781453, 'id', 'South East Sulawesi', 1, 'south-east-sulawesi');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274488, 781453, 'id', 'Bombana', 1, 'bombana'),
 (274489, 781453, 'id', 'Buton', 1, 'buton'),
 (274490, 781453, 'id', 'Kolaka', 1, 'kolaka'),
@@ -451,10 +451,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274498, 781453, 'id', 'Bau-Bau', 1, 'bau-bau'),
 (274499, 781453, 'id', 'Kendari', 1, 'kendari');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781454, 'id', 'South Kalimantan', 1, 'south-kalimantan');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274500, 781454, 'id', 'Balangan', 1, 'balangan'),
 (274501, 781454, 'id', 'Banjar', 1, 'banjar'),
 (274502, 781454, 'id', 'Barito Kuala', 1, 'barito-kuala'),
@@ -469,10 +469,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274511, 781454, 'id', 'Banjarbaru', 1, 'banjarbaru'),
 (274512, 781454, 'id', 'Banjarmasin', 1, 'banjarmasin');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781455, 'id', 'South Sulawesi', 1, 'south-sulawesi');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274513, 781455, 'id', 'Bantaeng', 1, 'bantaeng'),
 (274514, 781455, 'id', 'Barru', 1, 'barru'),
 (274515, 781455, 'id', 'Bone', 1, 'bone'),
@@ -497,10 +497,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274534, 781455, 'id', 'Sinjai', 1, 'sinjai'),
 (274535, 781455, 'id', 'Makassar', 1, 'makassar');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781456, 'id', 'South Sumatra', 1, 'south-sumatra');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274536, 781456, 'id', 'Banyuasin', 1, 'banyuasin'),
 (274537, 781456, 'id', 'East Ogan Komering Ulu', 1, 'east-ogan-komering-ulu'),
 (274538, 781456, 'id', 'Empat Lawang', 1, 'empat-lawang'),
@@ -517,10 +517,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274549, 781456, 'id', 'Prabumulih', 1, 'prabumulih'),
 (274550, 781456, 'id', 'Lubuklinggau', 1, 'lubuklinggau');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781457, 'id', 'West Java', 1, 'west-java');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274551, 781457, 'id', 'Bandung', 1, 'bandung'),
 (274552, 781457, 'id', 'Bekasi', 1, 'bekasi'),
 (274553, 781457, 'id', 'Bogor', 1, 'bogor'),
@@ -542,10 +542,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274569, 781457, 'id', 'Purwakarta', 1, 'purwakarta'),
 (274570, 781457, 'id', 'Tasikmalaya', 1, 'tasikmalaya');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781458, 'id', 'West Kalimantan', 1, 'west-kalimantan');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274571, 781458, 'id', 'Bengkayang Regency', 1, 'bengkayang-regency'),
 (274572, 781458, 'id', 'Kapuas Hulu Regency', 1, 'kapuas-hulu-regency'),
 (274573, 781458, 'id', 'North Kayong Regency', 1, 'north-kayong-regency'),
@@ -560,10 +560,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274582, 781458, 'id', 'Singkawang', 1, 'singkawang'),
 (274583, 781458, 'id', 'Pontianak', 1, 'pontianak');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781459, 'id', 'West Nusa Tenggara', 1, 'west-nusa-tenggara');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274584, 781459, 'id', 'Bima', 1, 'bima'),
 (274585, 781459, 'id', 'Central Lombok', 1, 'central-lombok'),
 (274586, 781459, 'id', 'Dompu', 1, 'dompu'),
@@ -574,10 +574,10 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274591, 781459, 'id', 'West Sumbawa', 1, 'west-sumbawa'),
 (274592, 781459, 'id', 'Mataram', 1, 'mataram');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781460, 'id', 'West Papua', 1, 'west-papua');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274593, 781460, 'id', 'Fak-Fak', 1, 'fak-fak'),
 (274594, 781460, 'id', 'Kaimana', 1, 'kaimana'),
 (274595, 781460, 'id', 'Maybrat', 1, 'maybrat'),
@@ -589,20 +589,20 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274601, 781460, 'id', 'Teluk Wondama', 1, 'teluk-wondama'),
 (274602, 781460, 'id', 'Manokwari', 1, 'manokwari');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781461, 'id', 'West Sulawesi', 1, 'west-sulawesi');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274603, 781461, 'id', 'Majene', 1, 'majene'),
 (274604, 781461, 'id', 'Mamasa', 1, 'mamasa'),
 (274605, 781461, 'id', 'Mamuju', 1, 'mamuju'),
 (274606, 781461, 'id', 'North Mamuju', 1, 'north-mamuju'),
 (274607, 781461, 'id', 'Polewali Mandar', 1, 'polewali-mandar');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781462, 'id', 'West Sumatra', 1, 'west-sumatra');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274608, 781462, 'id', 'Agam', 1, 'agam'),
 (274609, 781462, 'id', 'Dharmasraya', 1, 'dharmasraya'),
 (274610, 781462, 'id', 'Lima Puluh Kota', 1, 'lima-puluh-kota'),
@@ -622,13 +622,12 @@ REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code,
 (274624, 781462, 'id', 'Payakumbuh', 1, 'payakumbuh'),
 (274625, 781462, 'id', 'Sawahlunto', 1, 'sawahlunto');
 
-REPLACE INTO /*TABLE_PREFIX*/t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_region (pk_i_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (781463, 'id', 'Yogyakarta', 1, 'yogyakarta');
 
-REPLACE INTO /*TABLE_PREFIX*/t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
+REPLACE INTO oc_t_city (pk_i_id, fk_i_region_id, fk_c_country_code, s_name, b_active, s_slug) VALUES 
 (274626, 781463, 'id', 'Bantul', 1, 'bantul'),
 (274627, 781463, 'id', 'Gunung Kidul', 1, 'gunung-kidul'),
 (274628, 781463, 'id', 'Kulon Progo', 1, 'kulon-progo'),
 (274629, 781463, 'id', 'Sleman', 1, 'sleman'),
 (274630, 781463, 'id', 'Yogyakarta', 1, 'yogyakarta');
-
